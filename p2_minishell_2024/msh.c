@@ -202,9 +202,37 @@ int main(int argc, char* argv[])
 			else {
 				// Print command
 				print_command(argvv, filev, in_background);
+                execute_command(argvv, filev, in_background);
 			}
 		}
+
 	}
 	
 	return 0;
+}
+void execute_command(char** argvv, char*filev,int*bg){
+    // Here implement bg
+    
+} 
+int ls(int argc, char *argv[])
+{
+	if(argc != 2) // We check that the number of arguments is two the program and the folder
+	{
+		printf("Number of arguments is %i not 2\n",argc); //Print the Error
+		return -1; // Return  Error
+	}
+    
+    DIR *dir;
+    struct dirent *entry;
+    if ((dir = opendir(argv[1])) == NULL) { //We open the directory and asigned it to a variable. Also we check that is not null and give an error mesage if its null.
+        printf("Directory %s is not found",argv[2] ); // Print the Error
+        return -1; //Return Error
+    }
+    ;
+    while ((entry = readdir(dir)) != NULL) //We asign the value of the files to entry and check until it is null
+      {
+        printf("%s\n",entry->d_name); // We print the values' name atribute
+        } 
+    closedir(dir); // We make sure to always close the directory
+	return 0; // Return succesfull run
 }
